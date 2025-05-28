@@ -40,46 +40,56 @@ public class EmployeeManagementSystem {
         return new ArrayList<>(employees.values());
     }
 
-    //isPrime
-    public List<Integer> isPrime(HashMap<Integer, Employee> map){
-        int n=map.size();
-        List<Integer> lis=new ArrayList<>();
-        for (Integer key : map.keySet()){
-            for(int i=2;i<=(key/2)+1;i++){
-                if(key==1){
-                    continue;
-                }else{
-                    if(key %i==0){
-                        list.add(key);
-                    }
-                } 
+
+    // Get all employee with prime ID
+    public List<Integer> getPrimeEmployeeIds(HashMap<Integer, Employee> employeeMap) {
+        List<Integer> primeIds = new ArrayList<>();
+        for (Integer id : employeeMap.keySet()) {
+            if (isPrime(id)) {
+                primeIds.add(id);
             }
-        }
-        return lis;
 
+        }
+        return primeIds;
+    }
+    
+    // Check whether a number is prime or not
+    private boolean isPrime(int num) {
+        if (num <= 1)
+            return false;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0)
+                return false;
+        }
+        return true;
     }
 
-    public static void main(String[] args) {
-        EmployeeManagementSystem ems = new EmployeeManagementSystem();
-        ems.addEmployee("Alice", "HR", 50000);
-        ems.addEmployee("Bob", "IT", 60000);
-        ems.addEmployee("Charlie", "Finance", 55000);
-        ems.addEmployee("David", "Engineering", 75000);
-        ems.addEmployee("Eva", "Marketing", 52000);
-        ems.addEmployee("Frank", "HR", 48000);
-        ems.addEmployee("Grace", "Engineering", 82000);
-        ems.addEmployee("Hannah", "Sales", 47000);
-        ems.addEmployee("Ian", "IT", 63000);
-        ems.addEmployee("Julia", "Finance", 58000);
-        ems.addEmployee("Kevin", "Operations", 51000);
+   public static void main(String[] args) {
+    EmployeeManagementSystem ems = new EmployeeManagementSystem();
 
-        ems.updateEmployee(2, "Bob Marley", "IT", 62000);
-        ems.removeEmployee(3);
+    ems.addEmployee("Alice", "HR", 50000);       // ID 1
+    ems.addEmployee("Bob", "IT", 60000);         // ID 2
+    ems.addEmployee("Charlie", "Finance", 55000); // ID 3
+    ems.addEmployee("David", "Marketing", 52000); // ID 4
+    ems.addEmployee("Eve", "Legal", 58000);       // ID 5
+    ems.addEmployee("Frank", "Admin", 51000);     // ID 6
+    ems.addEmployee("Grace", "IT", 62000);        // ID 7
+    ems.addEmployee("Hank", "Finance", 57000);    // ID 8
+    ems.addEmployee("Ivy", "HR", 59000);          // ID 9
+    ems.addEmployee("John", "Legal", 53000);      // ID 10
 
-        for (Employee emp : ems.listAllEmployees()) {
-            System.out.println(emp);
-        }
+    ems.updateEmployee(2, "Bob Marley", "IT", 62000);
+    ems.removeEmployee(3);
+
+    for (Employee emp : ems.listAllEmployees()) {
+        System.out.println(emp);
     }
+
+    // Test prime ID function
+    List<Integer> primeIds = ems.getPrimeEmployeeIds(new HashMap<>(ems.employees));
+    System.out.println("Prime Employee IDs: " + primeIds);
+}
+
 }
 
 class Employee {
