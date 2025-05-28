@@ -1,4 +1,3 @@
-package com.example.employee;
 
 import java.util.*;
 
@@ -30,6 +29,7 @@ public class EmployeeManagementSystem {
         return false;
     }
 
+
     // Delete
     public boolean removeEmployee(int id) {
         return employees.remove(id) != null;
@@ -40,11 +40,38 @@ public class EmployeeManagementSystem {
         return new ArrayList<>(employees.values());
     }
 
+    //isPrime
+    public List<Integer> isPrime(HashMap<Integer, Employee> map){
+        int n=map.size();
+        List<Integer> lis=new ArrayList<>();
+        for (Integer key : map.keySet()){
+            for(int i=2;i<=(key/2)+1;i++){
+                if(key==1){
+                    continue;
+                }else{
+                    if(key %i==0){
+                        list.add(key);
+                    }
+                } 
+            }
+        }
+        return lis;
+
+    }
+
     public static void main(String[] args) {
         EmployeeManagementSystem ems = new EmployeeManagementSystem();
         ems.addEmployee("Alice", "HR", 50000);
         ems.addEmployee("Bob", "IT", 60000);
         ems.addEmployee("Charlie", "Finance", 55000);
+        ems.addEmployee("David", "Engineering", 75000);
+        ems.addEmployee("Eva", "Marketing", 52000);
+        ems.addEmployee("Frank", "HR", 48000);
+        ems.addEmployee("Grace", "Engineering", 82000);
+        ems.addEmployee("Hannah", "Sales", 47000);
+        ems.addEmployee("Ian", "IT", 63000);
+        ems.addEmployee("Julia", "Finance", 58000);
+        ems.addEmployee("Kevin", "Operations", 51000);
 
         ems.updateEmployee(2, "Bob Marley", "IT", 62000);
         ems.removeEmployee(3);
